@@ -21,20 +21,20 @@ public class AuthExceptionHandler {
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String handleAccessDeniedException(AccessDeniedException exception){
         return "Vous n'êtes pas authorisé";
     }
 
     @ExceptionHandler(SignatureException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public String handleBadCredentialException(SignatureException exception){
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public String handleSignatureException(SignatureException exception){
         return "Signature du token invalide";
     }
 
     @ExceptionHandler(ExpiredJwtException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public String handleBadCredentialException(ExpiredJwtException exception){
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public String handleExpiredJwtException(ExpiredJwtException exception){
         return "JWT expiré";
     }
 
