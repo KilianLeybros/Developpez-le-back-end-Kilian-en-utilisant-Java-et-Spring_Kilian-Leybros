@@ -1,6 +1,8 @@
 package com.openclassrooms.chatop.controller;
 
+import com.openclassrooms.chatop.model.dto.AuthResponse;
 import com.openclassrooms.chatop.model.dto.LoginInput;
+import com.openclassrooms.chatop.model.dto.Profil;
 import com.openclassrooms.chatop.model.dto.RegisterInput;
 import com.openclassrooms.chatop.model.entity.User;
 import com.openclassrooms.chatop.services.AuthenticationService;
@@ -25,27 +27,23 @@ public class AuthenticationController {
 
 
     @GetMapping("/me")
-    public ResponseEntity<User> me(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        User currentUser = (User) authentication.getPrincipal();
-
-        return ResponseEntity.ok(currentUser);
+    public ResponseEntity<Profil> me(){
+        return ResponseEntity.ok(authService.getAuthenticatedUser());
     }
 
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterInput registerInput){
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterInput registerInput){
         User registeredUser = authService.register(registerInput);
         String token = jwtService.generateToken(registeredUser);
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new AuthResponse(token));
     }
 
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginInput loginInput){
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginInput loginInput){
         User registeredUser = authService.login(loginInput);
         String token = jwtService.generateToken(registeredUser);
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new AuthResponse(token));
     }
 }
