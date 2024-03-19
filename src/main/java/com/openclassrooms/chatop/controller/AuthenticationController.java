@@ -7,6 +7,7 @@ import com.openclassrooms.chatop.model.dto.RegisterInput;
 import com.openclassrooms.chatop.model.entity.User;
 import com.openclassrooms.chatop.services.AuthenticationService;
 import com.openclassrooms.chatop.services.JwtService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class AuthenticationController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterInput registerInput){
+    public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterInput registerInput){
         User registeredUser = authService.register(registerInput);
         String token = jwtService.generateToken(registeredUser);
         return ResponseEntity.ok(new AuthResponse(token));
