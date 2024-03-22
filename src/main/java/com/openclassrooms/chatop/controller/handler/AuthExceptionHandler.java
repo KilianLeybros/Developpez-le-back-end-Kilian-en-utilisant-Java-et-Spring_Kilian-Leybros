@@ -10,6 +10,8 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.AuthenticationException;
+
 @RestControllerAdvice
 public class AuthExceptionHandler {
 
@@ -35,6 +37,12 @@ public class AuthExceptionHandler {
     @ExceptionHandler(ExpiredJwtException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String handleExpiredJwtException(ExpiredJwtException exception){
+        return "JWT expiré";
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public String handleException(AuthenticationException exception){
         return "JWT expiré";
     }
 

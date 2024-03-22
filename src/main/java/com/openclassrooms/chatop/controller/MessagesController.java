@@ -35,6 +35,8 @@ public class MessagesController {
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "La location avec l'id spécifié n'a pas été trouvé",
                     content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "401", description = "Unauthorized",
+                    content = {@Content(mediaType = "application/json")}),
     })
     @PostMapping
     public MessageResponse message(@RequestBody @Valid CreateMessageInput message) {

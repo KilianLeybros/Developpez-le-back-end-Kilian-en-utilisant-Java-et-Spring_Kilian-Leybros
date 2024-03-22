@@ -33,6 +33,8 @@ public class RentalsController {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RentalResponse.class))}),
             @ApiResponse(responseCode = "400", description = "Body de la requête invalide",
                     content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "401", description = "Unauthorized",
+                    content = {@Content(mediaType = "application/json")}),
     })
     @GetMapping
     public RentalResponse getAll(){
@@ -46,6 +48,8 @@ public class RentalsController {
             @ApiResponse(responseCode = "200", description = "Rental",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Rental.class))}),
             @ApiResponse(responseCode = "404", description = "La location avec l'id spécifié n'a pas été trouvé",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = {@Content(mediaType = "application/json")}),
     })
     @GetMapping("/{id}")
@@ -71,6 +75,8 @@ public class RentalsController {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = MessageResponse.class))}),
             @ApiResponse(responseCode = "400", description = "Body de la requête invalide",
                     content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "401", description = "Unauthorized",
+                    content = {@Content(mediaType = "application/json")}),
     })
     @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public MessageResponse create(@ModelAttribute @Valid CreateRentalInput model) throws IOException {
@@ -85,6 +91,8 @@ public class RentalsController {
             @ApiResponse(responseCode = "400", description = "Body de la requête invalide",
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "La location avec l'id spécifié n'a pas été trouvé",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = {@Content(mediaType = "application/json")}),
     })
     @PutMapping(value = "/{id}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
