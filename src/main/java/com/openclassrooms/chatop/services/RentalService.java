@@ -26,7 +26,7 @@ import java.util.List;
 @Service
 public class RentalService {
 
-    private final String RENTAL_NOT_FOUND_MESSAGE = "La réservation n'a pas été trouvée";
+    private final String RENTAL_NOT_FOUND_MESSAGE = "La réservation avec l'id spécifié n'a pas été trouvée";
     @Autowired
     private RentalRepository rentalRepository;
 
