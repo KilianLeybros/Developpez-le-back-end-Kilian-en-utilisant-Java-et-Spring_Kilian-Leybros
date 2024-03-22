@@ -39,8 +39,8 @@ public class AuthenticationService {
 
     public UserEntity login(LoginInput loginInput){
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginInput.login(), loginInput.password()));
-        return userRepository.findByEmail(loginInput.login()).orElseThrow();
+                new UsernamePasswordAuthenticationToken(loginInput.email(), loginInput.password()));
+        return userRepository.findByEmail(loginInput.email()).orElseThrow();
     }
 
     public Profil getAuthenticatedUser(){
