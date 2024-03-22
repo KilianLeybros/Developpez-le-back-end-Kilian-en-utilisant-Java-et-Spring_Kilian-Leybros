@@ -30,6 +30,6 @@ public class MessageEntity {
     @Column(name="created_at")
     private Timestamp createdAt;
 
-    @Column(name="created_at")
+    @Column(name="updated_at")
     private Timestamp updatedAt;
 }
