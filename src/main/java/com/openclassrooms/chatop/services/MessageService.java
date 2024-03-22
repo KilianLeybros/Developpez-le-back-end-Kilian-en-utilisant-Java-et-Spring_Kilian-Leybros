@@ -22,9 +22,12 @@ public class MessageService {
     @Autowired
     private RentalService rentalService;
 
+    @Autowired
+    private UserService userService;
+
     public ResponseMessage addMessage(CreateMessageInput message){
         RentalEntity rentalEntity = rentalService.findRentalById(message.rental_id());
-        UserEntity userEntity = new UserEntity();
+        UserEntity userEntity = userService.findUserById(message.user_id());
         MessageEntity messageToSave = new MessageEntity()
                 .setMessage(message.message())
                 .setCreatedAt(Timestamp.from(Instant.now()))
