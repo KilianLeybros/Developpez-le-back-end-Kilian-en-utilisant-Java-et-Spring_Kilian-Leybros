@@ -1,6 +1,7 @@
 package com.openclassrooms.chatop.controller;
 
 import com.openclassrooms.chatop.model.dto.*;
+import com.openclassrooms.chatop.model.entity.RentalEntity;
 import com.openclassrooms.chatop.repository.RentalRepository;
 import com.openclassrooms.chatop.services.RentalService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,7 +54,14 @@ public class RentalsController {
     })
     @GetMapping("/{id}")
     public Rental get(@PathVariable(value = "id") Long id) {
-        return rentalService.findRentalById(id);
+        RentalEntity rentalEntity = rentalService.findRentalById(id);
+        return new Rental(
+                rentalEntity.getId(),
+                rentalEntity.getName(),
+                rentalEntity.getSurface(),
+                rentalEntity.getPrice(),
+                rentalEntity.getPicture(),
+                rentalEntity.getDescription());
     }
 
 

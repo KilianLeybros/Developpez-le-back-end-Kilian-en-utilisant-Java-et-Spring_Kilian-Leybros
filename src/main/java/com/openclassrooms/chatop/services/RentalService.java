@@ -45,15 +45,8 @@ public class RentalService {
     }
 
 
-    public Rental findRentalById(Long id) {
-        var rental = rentalRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(RENTAL_NOT_FOUND_MESSAGE));
-        return new Rental(
-                rental.getId(),
-                rental.getName(),
-                rental.getSurface(),
-                rental.getPrice(),
-                rental.getPicture(),
-                rental.getDescription());
+    public RentalEntity findRentalById(Long id) {
+        return rentalRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(RENTAL_NOT_FOUND_MESSAGE));
     }
 
 
