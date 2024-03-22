@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Entity
 @Accessors(chain = true)
 @Data
-@Table(name = "message")
+@Table(name = "messages")
 public class MessageEntity {
 
     @Id

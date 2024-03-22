@@ -2,7 +2,7 @@ package com.openclassrooms.chatop.services;
 
 import com.openclassrooms.chatop.model.dto.CreateRentalInput;
 import com.openclassrooms.chatop.model.dto.Rental;
-import com.openclassrooms.chatop.model.dto.ResponseMessage;
+import com.openclassrooms.chatop.model.dto.MessageResponse;
 import com.openclassrooms.chatop.model.dto.UpdateRentalInput;
 import com.openclassrooms.chatop.model.entity.RentalEntity;
 import com.openclassrooms.chatop.model.entity.UserEntity;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,6 +21,7 @@ import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RentalService {
@@ -40,7 +40,10 @@ public class RentalService {
                        rental.getSurface(),
                        rental.getPrice(),
                        rental.getPicture(),
-                       rental.getDescription())).toList();
+                       rental.getDescription(),
+                       rental.getUser().getId(),
+                       rental.getCreatedAt().toLocalDateTime().toLocalDate(),
+                       Optional.ofNullable(rental.getUpdatedAt()).map(timestamp -> timestamp.toLocalDateTime().toLocalDate()).orElse(null))).toList();
 
     }
 
@@ -50,7 +53,7 @@ public class RentalService {
     }
 
 
-    public ResponseMessage createRental(CreateRentalInput rental) throws IOException{
+    public MessageResponse createRental(CreateRentalInput rental) throws IOException{
         UserEntity user = authenticationService.getCurrentUser();
         RentalEntity rentalEntity = new RentalEntity()
                 .setName(rental.name())
@@ -63,10 +66,10 @@ public class RentalService {
             rentalEntity.setPicture(writeRentalPicture(rental.picture()));
         }
         rentalRepository.save(rentalEntity);
-        return new ResponseMessage("Rental created !");
+        return new MessageResponse("Rental created !");
     }
 
-    public ResponseMessage updateRental(Long id,UpdateRentalInput updatedRental) {
+    public MessageResponse updateRental(Long id, UpdateRentalInput updatedRental) {
         RentalEntity rental = rentalRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(RENTAL_NOT_FOUND_MESSAGE));
 
         rental.setName(updatedRental.name())
@@ -76,7 +79,7 @@ public class RentalService {
             .setUpdatedAt(Timestamp.from(Instant.now()));
 
         rentalRepository.save(rental);
-        return new ResponseMessage("Rental updated !");
+        return new MessageResponse("Rental updated !");
     }
 
     public String writeRentalPicture(MultipartFile file) throws IOException {
