@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
         bearerFormat = "JWT",
         scheme = "bearer"
 )
-@OpenAPIDefinition(info = @Info(title = "fdsfsd"), security = @SecurityRequirement(name = "Authorization"))
+@OpenAPIDefinition(info = @Info(title = "ChâTop"), security = @SecurityRequirement(name = "Authorization"))
 public class SwaggerConfiguration {
 
 }
