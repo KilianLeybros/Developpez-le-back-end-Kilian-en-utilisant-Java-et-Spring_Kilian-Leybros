@@ -2,7 +2,6 @@ package com.openclassrooms.chatop.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,7 +12,7 @@ import java.util.Collection;
 @Data
 @Entity
 @Table(name = "users", indexes = @Index(columnList = "email"))
-public class User implements UserDetails {
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,27 +70,27 @@ public class User implements UserDetails {
 
 
 
-    public User setEmail(String email) {
+    public UserEntity setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public User setName(String name) {
+    public UserEntity setName(String name) {
         this.name = name;
         return this;
     }
 
-    public User setPassword(String password) {
+    public UserEntity setPassword(String password) {
          this.password = password;
         return this;
     }
 
-    public User setCreatedAt(Timestamp createdAt) {
+    public UserEntity setCreatedAt(Timestamp createdAt) {
          this.createdAt = createdAt;
         return this;
     }
 
-    public User setUpdatedAt(Timestamp updatedAt) {
+    public UserEntity setUpdatedAt(Timestamp updatedAt) {
          this.updatedAt = updatedAt;
         return this;
     }

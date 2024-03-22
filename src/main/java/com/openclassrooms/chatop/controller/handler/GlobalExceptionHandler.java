@@ -1,11 +1,14 @@
 package com.openclassrooms.chatop.controller.handler;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +26,20 @@ public class GlobalExceptionHandler {
             errorResult.put(fieldName, errorMessage);
         });
         return errorResult;
+    }
+
+
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String entityNotFoundHandler(EntityNotFoundException exception){
+        return exception.getMessage();
+    }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String exception(HandlerMethodValidationException exception){
+        return exception.getMessage();
     }
 
 }
