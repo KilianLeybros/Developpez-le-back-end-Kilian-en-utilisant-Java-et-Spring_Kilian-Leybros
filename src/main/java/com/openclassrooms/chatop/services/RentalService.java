@@ -9,27 +9,32 @@ import com.openclassrooms.chatop.model.entity.UserEntity;
 import com.openclassrooms.chatop.repository.RentalRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Value;
 
-import java.io.File;
+import org.springframework.stereotype.Service;
+
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class RentalService {
 
+    @Value("${server.port}")
+    private String serverPort;
+
     private final String RENTAL_NOT_FOUND_MESSAGE = "La réservation avec l'id spécifié n'a pas été trouvée";
     @Autowired
     private RentalRepository rentalRepository;
 
+    @Autowired
+    private UploadService uploadService;
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -63,7 +68,9 @@ public class RentalService {
                 .setPrice(Long.decode(rental.price()))
                 .setCreatedAt(Timestamp.from(Instant.now()));
         if(rental.picture() != null){
-            rentalEntity.setPicture(writeRentalPicture(rental.picture()));
+            var fileName = uploadService.uploadFile(rental.picture());
+            var fileEndpoint = buildFileEndpoint(fileName, InetAddress.getLocalHost());
+            rentalEntity.setPicture(fileEndpoint);
         }
         rentalRepository.save(rentalEntity);
         return new MessageResponse("Rental created !");
@@ -82,24 +89,8 @@ public class RentalService {
         return new MessageResponse("Rental updated !");
     }
 
-    public String writeRentalPicture(MultipartFile file) throws IOException {
-        String uploadPath = new ClassPathResource("static").getFile().getPath()+"\\upload\\";
-        Path filePath = Paths.get(uploadPath + file.getOriginalFilename());
-
-        File directory = new File(uploadPath);
-        File existingFile = new File(filePath.toString());
-
-        if(!directory.exists()){
-            new File(uploadPath).mkdirs();
-        }
-        else if(existingFile.exists()){
-            existingFile.delete();
-        }
-
-        byte[] fileBytes = file.getBytes();
-        Files.write(filePath, fileBytes);
-
-        return filePath.toString();
-
+    
+    private String buildFileEndpoint(String fileName, InetAddress localhost){
+        return "http://"+ localhost.getHostAddress() + ":" + serverPort + "/api/rentals/file/" + fileName;
     }
 }

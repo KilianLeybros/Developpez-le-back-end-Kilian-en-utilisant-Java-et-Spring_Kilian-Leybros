@@ -45,6 +45,7 @@ public class SpringSecurityConfig {
                     auth.requestMatchers("/swagger-ui/**").permitAll();
                     auth.requestMatchers("/v3/api-docs/**").permitAll();
                     auth.requestMatchers("/api/auth/**").permitAll();
+                    auth.requestMatchers("/api/rentals/file/**").permitAll();
                     auth.requestMatchers("/api/auth/me").authenticated();
                     auth.requestMatchers("/api/**").authenticated();
                 })

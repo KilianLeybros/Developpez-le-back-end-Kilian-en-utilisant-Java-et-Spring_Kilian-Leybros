@@ -3,6 +3,7 @@ package com.openclassrooms.chatop.controller;
 import com.openclassrooms.chatop.model.dto.*;
 import com.openclassrooms.chatop.model.entity.RentalEntity;
 import com.openclassrooms.chatop.services.RentalService;
+import com.openclassrooms.chatop.services.UploadService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,10 +12,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +30,9 @@ public class RentalsController {
 
     @Autowired
     private RentalService rentalService;
+
+    @Autowired
+    private UploadService uploadService;
 
     @Operation(summary = "Find Rentals", description = "Permet de lister toutes les locations")
     @ApiResponses(value = {
@@ -98,5 +105,11 @@ public class RentalsController {
     @PutMapping(value = "/{id}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public MessageResponse update(@PathVariable(value= "id") Long id, @ModelAttribute @Valid UpdateRentalInput model){
         return rentalService.updateRental(id, model);
+    }
+
+
+    @GetMapping(value="/file/{file}")
+    public ByteArrayResource getRentalPicture(@PathVariable String file) throws IOException{
+        return uploadService.getFileByteByName(file);
     }
 }
