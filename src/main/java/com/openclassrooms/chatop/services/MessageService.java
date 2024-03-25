@@ -1,12 +1,11 @@
 package com.openclassrooms.chatop.services;
 
 import com.openclassrooms.chatop.model.dto.CreateMessageInput;
-import com.openclassrooms.chatop.model.dto.ResponseMessage;
+import com.openclassrooms.chatop.model.dto.MessageResponse;
 import com.openclassrooms.chatop.model.entity.MessageEntity;
 import com.openclassrooms.chatop.model.entity.RentalEntity;
 import com.openclassrooms.chatop.model.entity.UserEntity;
 import com.openclassrooms.chatop.repository.MessageRepository;
-import com.openclassrooms.chatop.repository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,7 @@ public class MessageService {
     @Autowired
     private UserService userService;
 
-    public ResponseMessage addMessage(CreateMessageInput message){
+    public MessageResponse addMessage(CreateMessageInput message){
         RentalEntity rentalEntity = rentalService.findRentalById(message.rental_id());
         UserEntity userEntity = userService.findUserById(message.user_id());
         MessageEntity messageToSave = new MessageEntity()
@@ -35,6 +34,6 @@ public class MessageService {
                 .setUser(userEntity);
 
         messageRepository.save(messageToSave);
-        return new ResponseMessage("Message send with success");
+        return new MessageResponse("Message send with success");
     }
 }

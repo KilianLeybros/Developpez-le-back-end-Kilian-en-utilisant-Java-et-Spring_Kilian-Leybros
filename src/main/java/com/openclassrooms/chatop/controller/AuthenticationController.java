@@ -34,7 +34,9 @@ public class AuthenticationController {
     @Operation(summary = "Profil", description = "Permet d'accèder au profil de l'utilisateur connecté")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Utilisateur connecté",
-                    content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Profil.class)))})
+                    content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Profil.class)))}),
+            @ApiResponse(responseCode = "401", description = "Unauthorized",
+                    content = {@Content(mediaType = "application/json")}),
     })
     @GetMapping("/me")
     public ResponseEntity<Profil> me(){

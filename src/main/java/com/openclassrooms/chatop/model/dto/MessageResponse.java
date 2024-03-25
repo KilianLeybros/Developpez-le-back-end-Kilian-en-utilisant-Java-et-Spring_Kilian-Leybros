@@ -1,4 +1,4 @@
 package com.openclassrooms.chatop.model.dto;
 
-public record ResponseMessage(String message) {
+public record MessageResponse(String message) {
 }

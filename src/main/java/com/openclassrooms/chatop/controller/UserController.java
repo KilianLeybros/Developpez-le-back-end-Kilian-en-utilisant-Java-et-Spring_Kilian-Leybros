@@ -36,6 +36,8 @@ public class UserController {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = User.class))}),
             @ApiResponse(responseCode = "404", description = "L'utilisateur avec l'id spécifié n'a pas été trouvé",
                     content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "401", description = "Unauthorized",
+                    content = {@Content(mediaType = "application/json")}),
     })
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id){

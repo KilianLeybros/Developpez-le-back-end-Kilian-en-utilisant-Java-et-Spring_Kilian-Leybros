@@ -1,11 +1,13 @@
 package com.openclassrooms.chatop.model.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record RegisterInput(
         @NotBlank(message="L'adresse email est obligatoire")
         @Size(max=255, message = "L'adresse email contient trop de caractères")
+        @Email(message = "Le format de l'adresse mail n'est pas valide")
         String email,
 
         @NotBlank(message="Le nom est obligatoire")
