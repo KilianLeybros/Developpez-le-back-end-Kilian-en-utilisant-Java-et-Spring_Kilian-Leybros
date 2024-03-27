@@ -9,10 +9,11 @@ import java.time.Instant;
 
 public class UserEntityMapper {
 
-    public static UserEntity fromRegisterInput(RegisterInput registerInput){
+    public static UserEntity fromRegisterInput(RegisterInput registerInput, String password){
         return new UserEntity()
                 .setName(registerInput.name())
                 .setEmail(registerInput.email())
+                .setPassword(password)
                 .setCreatedAt(Timestamp.from(Instant.now()));
     }
 

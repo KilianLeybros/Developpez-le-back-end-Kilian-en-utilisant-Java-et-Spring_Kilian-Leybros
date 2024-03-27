@@ -32,9 +32,9 @@ public class AuthenticationService {
         userRepository.findByEmail(registerInput.email()).ifPresent((user) -> {
             throw new EmailAlreadyExistException("Un compte avec "+ user.getEmail() +" comme adresse mail existe déja");
         });
-        UserEntity user = UserEntityMapper.fromRegisterInput(registerInput);
-        user.setPassword(passwordEncoder.encode(registerInput.password()));
-        return user;
+        String encodedPassword = passwordEncoder.encode(registerInput.password());
+        UserEntity user = UserEntityMapper.fromRegisterInput(registerInput, encodedPassword);
+        return userRepository.save(user);
     }
 
     public UserEntity login(LoginInput loginInput){
