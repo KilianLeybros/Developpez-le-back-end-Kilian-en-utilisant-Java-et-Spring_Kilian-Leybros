@@ -1,9 +1,11 @@
 package com.openclassrooms.chatop.services;
 
+import com.openclassrooms.chatop.controller.handler.exception.EmailAlreadyExistException;
 import com.openclassrooms.chatop.model.dto.LoginInput;
 import com.openclassrooms.chatop.model.dto.Profil;
 import com.openclassrooms.chatop.model.dto.RegisterInput;
 import com.openclassrooms.chatop.model.entity.UserEntity;
+import com.openclassrooms.chatop.model.mapper.UserEntityMapper;
 import com.openclassrooms.chatop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,15 +28,13 @@ public class AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-
-    public UserEntity register(RegisterInput registerInput){
-        UserEntity user = new UserEntity()
-                .setName(registerInput.name())
-                .setEmail(registerInput.email())
-                .setPassword(passwordEncoder.encode(registerInput.password()))
-                .setCreatedAt(Timestamp.from(Instant.now()));
-        return userRepository.save(user);
-
+    public UserEntity register(RegisterInput registerInput) {
+        userRepository.findByEmail(registerInput.email()).ifPresent((user) -> {
+            throw new EmailAlreadyExistException("Un compte avec "+ user.getEmail() +" comme adresse mail existe déja");
+        });
+        UserEntity user = UserEntityMapper.fromRegisterInput(registerInput);
+        user.setPassword(passwordEncoder.encode(registerInput.password()));
+        return user;
     }
 
     public UserEntity login(LoginInput loginInput){
@@ -45,12 +45,7 @@ public class AuthenticationService {
 
     public Profil getAuthenticatedUser(){
         UserEntity currentUser = getCurrentUser();
-        return new Profil(
-                currentUser.getId(),
-                currentUser.getName(),
-                currentUser.getEmail(),
-                currentUser.getCreatedAt().toLocalDateTime().toLocalDate(),
-                currentUser.getUpdatedAt() != null ?  currentUser.getUpdatedAt().toLocalDateTime().toLocalDate() : null);
+        return UserEntityMapper.toProfil(currentUser);
     }
 
     public UserEntity getCurrentUser(){
