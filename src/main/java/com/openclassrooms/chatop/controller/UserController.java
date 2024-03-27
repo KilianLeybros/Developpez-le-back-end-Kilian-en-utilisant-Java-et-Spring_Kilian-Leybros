@@ -1,11 +1,9 @@
 package com.openclassrooms.chatop.controller;
 
-import com.openclassrooms.chatop.model.dto.Rental;
 import com.openclassrooms.chatop.model.dto.User;
 import com.openclassrooms.chatop.model.entity.UserEntity;
 import com.openclassrooms.chatop.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
 
 @RestController

@@ -1,11 +1,9 @@
 package com.openclassrooms.chatop.model.dto;
 
 import jakarta.validation.constraints.*;
-import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
+
 
 
 public record CreateRentalInput(

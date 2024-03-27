@@ -4,7 +4,6 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import org.springframework.web.multipart.MultipartFile;
 
 public record UpdateRentalInput(
         @NotEmpty(message = "Le nom est obligatoire")

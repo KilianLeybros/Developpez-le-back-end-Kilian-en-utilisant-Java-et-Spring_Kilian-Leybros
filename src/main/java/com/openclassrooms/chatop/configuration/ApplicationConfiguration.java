@@ -18,11 +18,16 @@ public class ApplicationConfiguration {
     @Autowired
     private  UserRepository userRepository;
 
+    /***
+     *
+     * @return Une implémentation de UserDetailService et de la méthode loadUserByUserName
+     */
     @Bean
     public UserDetailsService userDetailsService(){
         return username -> userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
     }
+
 
     @Bean
     BCryptPasswordEncoder passwordEncoder(){

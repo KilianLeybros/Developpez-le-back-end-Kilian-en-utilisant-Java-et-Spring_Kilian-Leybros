@@ -57,6 +57,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             }
             filterChain.doFilter(request, response);
         } catch (Exception exception) {
+            // En fonction de l'exception levée, un exception handler (dans le package exception) va traiter l'exception
             handlerExceptionResolver.resolveException(request, response, null, exception);
         }
 

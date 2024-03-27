@@ -37,21 +37,16 @@ public class JwtService {
         return buildToken(extraClaims, userDetails/*, jwtExpiration*/);
     }
 
-   /* public long getExpirationTime() {
-        return jwtExpiration;
-    }*/
 
     private String buildToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails
-            // long expiration
     ) {
         return Jwts
                 .builder()
                 .claims(extraClaims)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                //.expiration(new Date(System.currentTimeMillis() + expiration))
                 .expiration(new Date(System.currentTimeMillis() + 10000*60))
                 .signWith(rsaKey.privateKey())
                 .compact();
