@@ -2,6 +2,7 @@ package com.openclassrooms.chatop.controller;
 
 import com.openclassrooms.chatop.model.dto.*;
 import com.openclassrooms.chatop.model.entity.RentalEntity;
+import com.openclassrooms.chatop.model.mapper.RentalEntityMapper;
 import com.openclassrooms.chatop.services.RentalService;
 import com.openclassrooms.chatop.services.UploadService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -62,16 +63,7 @@ public class RentalsController {
     @GetMapping("/{id}")
     public Rental get(@PathVariable(value = "id") Long id) {
         RentalEntity rentalEntity = rentalService.findRentalById(id);
-        return new Rental(
-                rentalEntity.getId(),
-                rentalEntity.getName(),
-                rentalEntity.getSurface(),
-                rentalEntity.getPrice(),
-                rentalEntity.getPicture(),
-                rentalEntity.getDescription(),
-                rentalEntity.getUser().getId(),
-                rentalEntity.getCreatedAt().toLocalDateTime().toLocalDate(),
-                Optional.ofNullable(rentalEntity.getUpdatedAt()).map(timestamp -> timestamp.toLocalDateTime().toLocalDate()).orElse(null));
+        return RentalEntityMapper.toRental(rentalEntity);
     }
 
 

@@ -13,6 +13,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     public UserEntity findUserById(Long id){
-        return  userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_MESSAGE));
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_MESSAGE));
     }
 }
