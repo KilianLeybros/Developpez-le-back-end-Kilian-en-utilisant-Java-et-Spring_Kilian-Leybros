@@ -1,4 +1,4 @@
-package com.openclassrooms.chatop.services;
+package com.openclassrooms.chatop.services.implementations;
 
 import com.openclassrooms.chatop.model.dto.CreateMessageInput;
 import com.openclassrooms.chatop.model.dto.MessageResponse;
@@ -7,23 +7,23 @@ import com.openclassrooms.chatop.model.entity.RentalEntity;
 import com.openclassrooms.chatop.model.entity.UserEntity;
 import com.openclassrooms.chatop.model.mapper.MessageEntityMapper;
 import com.openclassrooms.chatop.repository.MessageRepository;
+import com.openclassrooms.chatop.services.IMessageService;
+import com.openclassrooms.chatop.services.IRentalService;
+import com.openclassrooms.chatop.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-
 @Service
-public class MessageService {
+public class MessageService implements IMessageService {
 
     @Autowired
     private MessageRepository messageRepository;
 
     @Autowired
-    private RentalService rentalService;
+    private IRentalService rentalService;
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     public MessageResponse addMessage(CreateMessageInput message){
         RentalEntity rentalEntity = rentalService.findRentalById(message.rental_id());

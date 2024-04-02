@@ -1,6 +1,7 @@
-package com.openclassrooms.chatop.services;
+package com.openclassrooms.chatop.services.implementations;
 
 import com.openclassrooms.chatop.configuration.RsaKeyProperties;
+import com.openclassrooms.chatop.services.IJwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtService {
+public class JwtService implements IJwtService {
 
     @Autowired
     private RsaKeyProperties rsaKey;

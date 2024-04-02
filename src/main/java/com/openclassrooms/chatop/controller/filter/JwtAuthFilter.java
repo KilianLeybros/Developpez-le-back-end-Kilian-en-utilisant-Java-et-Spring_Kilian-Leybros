@@ -1,6 +1,6 @@
 package com.openclassrooms.chatop.controller.filter;
 
-import com.openclassrooms.chatop.services.JwtService;
+import com.openclassrooms.chatop.services.implementations.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
