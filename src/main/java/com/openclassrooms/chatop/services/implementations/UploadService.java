@@ -2,7 +2,6 @@ package com.openclassrooms.chatop.services.implementations;
 
 import com.openclassrooms.chatop.controller.handler.exception.InvalidFileFormatException;
 import com.openclassrooms.chatop.services.IUploadService;
-import org.apache.tomcat.util.http.fileupload.impl.InvalidContentTypeException;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

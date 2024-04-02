@@ -7,8 +7,6 @@ import com.openclassrooms.chatop.model.dto.RegisterInput;
 import com.openclassrooms.chatop.model.entity.UserEntity;
 import com.openclassrooms.chatop.services.IAuthenticationService;
 import com.openclassrooms.chatop.services.IJwtService;
-import com.openclassrooms.chatop.services.implementations.AuthenticationService;
-import com.openclassrooms.chatop.services.implementations.JwtService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;

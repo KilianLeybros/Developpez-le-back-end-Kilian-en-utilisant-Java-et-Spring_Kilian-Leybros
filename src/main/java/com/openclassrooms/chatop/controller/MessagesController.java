@@ -3,7 +3,6 @@ package com.openclassrooms.chatop.controller;
 import com.openclassrooms.chatop.model.dto.CreateMessageInput;
 import com.openclassrooms.chatop.model.dto.MessageResponse;
 import com.openclassrooms.chatop.services.IMessageService;
-import com.openclassrooms.chatop.services.implementations.MessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
