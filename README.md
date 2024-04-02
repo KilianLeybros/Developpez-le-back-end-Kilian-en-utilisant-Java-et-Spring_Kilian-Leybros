@@ -3,6 +3,8 @@
 
 ## Start the project
 
+Git clone : https://github.com/KilianLeybros/Developpez-le-back-end-Kilian-en-utilisant-Java-et-Spring_Kilian-Leybros.git
+
 Le projet est réalisé sous java 17, le jdk 17 est nécessaire pour lancer le projet.
 
 Se rendre à la racine du projet (/chatop) et installer les dépendances grâce à gradle :

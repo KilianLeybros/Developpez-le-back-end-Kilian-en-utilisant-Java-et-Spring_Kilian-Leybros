@@ -1,4 +1,4 @@
-package com.openclassrooms.chatop.services;
+package com.openclassrooms.chatop.services.implementations;
 
 import com.openclassrooms.chatop.model.dto.CreateRentalInput;
 import com.openclassrooms.chatop.model.dto.Rental;
@@ -8,6 +8,9 @@ import com.openclassrooms.chatop.model.entity.RentalEntity;
 import com.openclassrooms.chatop.model.entity.UserEntity;
 import com.openclassrooms.chatop.model.mapper.RentalEntityMapper;
 import com.openclassrooms.chatop.repository.RentalRepository;
+import com.openclassrooms.chatop.services.IAuthenticationService;
+import com.openclassrooms.chatop.services.IRentalService;
+import com.openclassrooms.chatop.services.IUploadService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,15 +20,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class RentalService {
+public class RentalService implements IRentalService {
 
     @Value("${server.port}")
     private String serverPort;
@@ -35,9 +33,9 @@ public class RentalService {
     private RentalRepository rentalRepository;
 
     @Autowired
-    private UploadService uploadService;
+    private IUploadService uploadService;
     @Autowired
-    private AuthenticationService authenticationService;
+    private IAuthenticationService authenticationService;
 
     public List<Rental> findRentals(){
        return rentalRepository.findAll().stream().map(RentalEntityMapper::toRental).toList();

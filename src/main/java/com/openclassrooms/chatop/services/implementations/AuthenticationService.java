@@ -1,4 +1,4 @@
-package com.openclassrooms.chatop.services;
+package com.openclassrooms.chatop.services.implementations;
 
 import com.openclassrooms.chatop.controller.handler.exception.EmailAlreadyExistException;
 import com.openclassrooms.chatop.model.dto.LoginInput;
@@ -7,6 +7,7 @@ import com.openclassrooms.chatop.model.dto.RegisterInput;
 import com.openclassrooms.chatop.model.entity.UserEntity;
 import com.openclassrooms.chatop.model.mapper.UserEntityMapper;
 import com.openclassrooms.chatop.repository.UserRepository;
+import com.openclassrooms.chatop.services.IAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +20,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 @Service
-public class AuthenticationService {
+public class AuthenticationService implements IAuthenticationService {
 
     @Autowired
     private UserRepository userRepository;
