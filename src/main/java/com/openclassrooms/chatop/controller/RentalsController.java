@@ -5,8 +5,6 @@ import com.openclassrooms.chatop.model.entity.RentalEntity;
 import com.openclassrooms.chatop.model.mapper.RentalEntityMapper;
 import com.openclassrooms.chatop.services.IRentalService;
 import com.openclassrooms.chatop.services.IUploadService;
-import com.openclassrooms.chatop.services.implementations.RentalService;
-import com.openclassrooms.chatop.services.implementations.UploadService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
