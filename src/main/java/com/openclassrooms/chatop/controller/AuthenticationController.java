@@ -5,8 +5,8 @@ import com.openclassrooms.chatop.model.dto.LoginInput;
 import com.openclassrooms.chatop.model.dto.Profil;
 import com.openclassrooms.chatop.model.dto.RegisterInput;
 import com.openclassrooms.chatop.model.entity.UserEntity;
-import com.openclassrooms.chatop.services.AuthenticationService;
-import com.openclassrooms.chatop.services.JwtService;
+import com.openclassrooms.chatop.services.IAuthenticationService;
+import com.openclassrooms.chatop.services.IJwtService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
 
     @Autowired
-    private JwtService jwtService;
+    private IJwtService jwtService;
 
     @Autowired
-    private AuthenticationService authService;
+    private IAuthenticationService authService;
 
 
     @Operation(summary = "Profil", description = "Permet d'accèder au profil de l'utilisateur connecté")

@@ -3,8 +3,8 @@ package com.openclassrooms.chatop.controller;
 import com.openclassrooms.chatop.model.dto.*;
 import com.openclassrooms.chatop.model.entity.RentalEntity;
 import com.openclassrooms.chatop.model.mapper.RentalEntityMapper;
-import com.openclassrooms.chatop.services.RentalService;
-import com.openclassrooms.chatop.services.UploadService;
+import com.openclassrooms.chatop.services.IRentalService;
+import com.openclassrooms.chatop.services.IUploadService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -26,10 +26,10 @@ public class RentalsController {
 
 
     @Autowired
-    private RentalService rentalService;
+    private IRentalService rentalService;
 
     @Autowired
-    private UploadService uploadService;
+    private IUploadService uploadService;
 
     @Operation(summary = "Find Rentals", description = "Permet de lister toutes les locations")
     @ApiResponses(value = {

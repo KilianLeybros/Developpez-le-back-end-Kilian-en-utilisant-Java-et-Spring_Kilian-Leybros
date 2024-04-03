@@ -2,7 +2,7 @@ package com.openclassrooms.chatop.controller;
 
 import com.openclassrooms.chatop.model.dto.User;
 import com.openclassrooms.chatop.model.entity.UserEntity;
-import com.openclassrooms.chatop.services.UserService;
+import com.openclassrooms.chatop.services.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
 
     @Operation(summary = "Find User", description = "Permet de récupérer un utilisateur via son id")

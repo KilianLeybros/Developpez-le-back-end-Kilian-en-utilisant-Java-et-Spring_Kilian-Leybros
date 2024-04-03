@@ -1,7 +1,7 @@
-package com.openclassrooms.chatop.services;
+package com.openclassrooms.chatop.services.implementations;
 
 import com.openclassrooms.chatop.controller.handler.exception.InvalidFileFormatException;
-import org.apache.tomcat.util.http.fileupload.impl.InvalidContentTypeException;
+import com.openclassrooms.chatop.services.IUploadService;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,14 +9,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
 @Service
-public class UploadService {
+public class UploadService implements IUploadService {
 
     private final String[] ALLOWED_CONTENT_TYPE = { "image/png", "image/jpeg" };
 

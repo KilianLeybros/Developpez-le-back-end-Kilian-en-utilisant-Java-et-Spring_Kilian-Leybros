@@ -1,6 +1,6 @@
 package com.openclassrooms.chatop.controller.filter;
 
-import com.openclassrooms.chatop.services.JwtService;
+import com.openclassrooms.chatop.services.IJwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ import java.io.IOException;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtService jwtService;
+    private IJwtService jwtService;
     @Autowired
     private UserDetailsService userDetailsService;
 
