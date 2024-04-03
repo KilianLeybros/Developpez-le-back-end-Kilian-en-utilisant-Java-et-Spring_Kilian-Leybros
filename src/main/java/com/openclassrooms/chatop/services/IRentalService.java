@@ -7,7 +7,6 @@ import com.openclassrooms.chatop.model.dto.UpdateRentalInput;
 import com.openclassrooms.chatop.model.entity.RentalEntity;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.util.List;
 
 public interface IRentalService {
